@@ -1,0 +1,24 @@
+{
+  "name": "task-manager-app",
+  "version": "1.0.0",
+  "description": "Finals project for CIS 1202",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kulaizki/Task-Manager-App.git"
+  },
+  "author": "Bonghanoy, de Jesus, Go, Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kulaizki/Task-Manager-App/issues"
+  },
+  "homepage": "https://github.com/kulaizki/Task-Manager-App#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
