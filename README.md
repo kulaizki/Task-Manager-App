@@ -4,7 +4,7 @@ Welcome to our CIS1202 Web Development project! This project was created for the
 
 ## Project Description
 
-This project is a website for [insert your website topic here]. The website has multiple pages, including a home page, about page, and contact page. The website also includes a navigation bar for easy navigation between pages.
+A Task Manager Web Application that lets users track their tasks and display them in a pretty dashboard view.
 
 ## Technologies Used
 
