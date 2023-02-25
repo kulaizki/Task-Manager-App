@@ -1,0 +1,17 @@
+:root {
+  --primary: #6301ee;
+  --primary-variant: #3700b3;
+  --secondary: #02dac7;
+  --secondary-variant: #018687;
+  
+  --background: #ffffff;
+  --surface: #ffffff;
+  --error: #b00020;
+
+  /* text color values */
+  --text-on-primary: #ffffff;
+  --text-on-secondary: #000000;
+  --text-on-background: #000000;
+  --text-on-surface: #000000;
+  --text-on-error: #ffffff;
+}
