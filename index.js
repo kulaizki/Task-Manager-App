@@ -1,40 +1,23 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+const express = require('express');
 
 const app = express();
-dotenv.config();
 
-process.on('uncaughtException', (err) => {
-  //any errors in synchronous code
-  console.log(err.name, err.message);
-  console.log('UNCAUGHT EXCEPTION');
+const db = require('./server/models');
 
-  process.exit(1);
-});
+const { Task } = require('./server/models');
 
-const DB = `TBD`;
+const taskRouter = require('./server/routes/taskRoute');
 
-mongoose
-  .connect(DB, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  })
-  .then((con) => {
-    console.log('connection successful');
-  });
+const bodyParser = require('body-parser');
 
-const port = process.env.PORT || 8000;
+app.use(bodyParser.json());
 
-const server = app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
-});
+app.use(bodyParser.urlencoded({ extended: true }));
 
-process.on('unhandledRejection', (err) => {
-  //rejected promises anywhere in code
-  console.log(err.name, err.message);
-  console.log('UNHANDLED REJECTION');
-  server.close(() => {
-    process.exit(1);
+app.use('/task', taskRouter);
+
+db.sequelize.sync().then((req) => {
+  app.listen(3001, () => {
+    console.log('server running on port 3001');
   });
 });

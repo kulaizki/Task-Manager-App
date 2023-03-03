@@ -1,42 +1,50 @@
-import mongoose from 'mongoose';
+const { Sequelize, DataTypes } = require('sequelize');
 
-const taskSchema = mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: [true, 'Task must have a name'],
-      unique: false,
-      trim: true,
-    },
-    dateStarted: {
-      type: Date,
-      required: [true, 'Task must have a start date'],
-      unique: false,
-      default: Date.now(),
-    },
-    isFinished: {
-      type: Boolean,
-      required: [true, 'Task must have this field'],
-      default: false,
-    },
-    deadline: {
-      type: Date,
-      required: false,
-      unique: false,
-      default: Date.now(),
-    },
-    startDates: [Date],
-    deadlines: [Date],
-    pendingTasks: {
-      type: Number,
-    },
-  },
-  {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
-  }
-);
+DataTypes.DATE.prototype._stringify = function _stringify(date, options) {
+  date = this._applyTimezone(date, options);
+  return date.format('YYYY-MM-DD HH:mm:ss.SSS');
+};
 
-const Task = mongoose.model('Task', taskSchema);
+module.exports = (sequelize, Datatypes) => {
+  const Task = sequelize.define(
+    'Task',
+    {
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      dateStarted: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+      },
+      isFinished: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      deadline: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      pendingTasks: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+    },
+    {
+      timestamps: true,
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+    }
+  );
 
-export default Task;
+  return Task;
+};
