@@ -18,3 +18,11 @@ exports.createTask = async (req, res) => {
 
   res.status(201).send(ret);
 };
+
+exports.displayTasks = async (req, res) => {
+  console.log('receved data');
+
+  let ret = await instance.Task.findAll();
+  console.log(ret);
+  res.status(201).send(ret);
+};
